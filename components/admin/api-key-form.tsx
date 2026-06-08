@@ -6,16 +6,9 @@ import { useFormStatus } from "react-dom";
 import { createApiKeyAction, type AdminActionState } from "@/app/(app)/workspace-admin-actions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { allowedApiPermissions } from "@/lib/api-permissions";
 
 const initialState: AdminActionState = {};
-const defaultPermissions = [
-  "products:read",
-  "orders:read",
-  "stock:read",
-  "finance:read",
-  "suppliers:read",
-  "insights:read",
-];
 
 function SubmitButton() {
   const { pending } = useFormStatus();
@@ -30,7 +23,7 @@ export function ApiKeyForm() {
     <form action={action} className="space-y-4 rounded-2xl border border-white/7 bg-white/3 p-5">
       <Input name="label" placeholder="Ex.: ERP parceiro, BI, App mobile" />
       <div className="grid gap-2 sm:grid-cols-2">
-        {defaultPermissions.map((permission) => (
+        {allowedApiPermissions.map((permission) => (
           <label
             key={permission}
             className="flex items-center gap-3 rounded-2xl border border-white/7 bg-white/3 px-4 py-3 text-sm text-white"
@@ -55,4 +48,3 @@ export function ApiKeyForm() {
     </form>
   );
 }
-

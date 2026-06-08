@@ -1,5 +1,6 @@
 import { z } from "zod";
 
+import { allowedApiPermissions } from "@/lib/api-permissions";
 import { sanitizeUserInput } from "@/lib/security";
 
 export const emailSchema = z.string().email("Informe um email válido.").transform((value) => value.toLowerCase().trim());
@@ -79,5 +80,5 @@ export const whiteLabelSchema = z.object({
 
 export const apiKeyCreateSchema = z.object({
   label: z.string().min(3).max(80).transform(sanitizeUserInput),
-  permissions: z.array(z.string().min(3).max(80)).min(1).max(10),
+  permissions: z.array(z.enum(allowedApiPermissions)).min(1).max(allowedApiPermissions.length),
 });

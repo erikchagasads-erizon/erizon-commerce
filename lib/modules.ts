@@ -29,6 +29,11 @@ export type ModuleSlug =
   | "white-label"
   | "system-health"
   | "developer-api"
+  | "data-cloud"
+  | "event-bus"
+  | "market-intelligence"
+  | "automations"
+  | "mobile"
   | "orders"
   | "products"
   | "stock"
@@ -43,8 +48,27 @@ export type ModuleSlug =
   | "memory"
   | "settings";
 
+export type ProductModuleSlug =
+  | "orders"
+  | "products"
+  | "stock"
+  | "wms"
+  | "marketplaces"
+  | "ecommerce"
+  | "pos"
+  | "finance"
+  | "tax"
+  | "suppliers"
+  | "agents"
+  | "memory"
+  | "data-cloud"
+  | "event-bus"
+  | "market-intelligence"
+  | "automations"
+  | "mobile";
+
 export interface ModuleDefinition {
-  slug: "orders" | "products" | "stock" | "wms" | "marketplaces" | "ecommerce" | "pos" | "finance" | "tax" | "suppliers" | "agents" | "memory";
+  slug: ProductModuleSlug;
   label: string;
   title: string;
   subtitle: string;
@@ -90,6 +114,20 @@ export const navigationGroups = [
         label: "Dashboard",
         description: "Resumo executivo do negócio",
         icon: "command" as const,
+      },
+      {
+        slug: "data-cloud" as const,
+        href: "/data-cloud",
+        label: "Data Cloud",
+        description: "Metricas, fontes e modelos",
+        icon: "brain" as const,
+      },
+      {
+        slug: "event-bus" as const,
+        href: "/event-bus",
+        label: "Event Bus",
+        description: "Eventos, webhooks e triggers",
+        icon: "spark" as const,
       },
     ],
   },
@@ -151,6 +189,20 @@ export const navigationGroups = [
         label: "Fornecedores",
         description: "Supply network inteligente",
         icon: "truck" as const,
+      },
+      {
+        slug: "automations" as const,
+        href: "/automations",
+        label: "Automacoes",
+        description: "Regras, playbooks e execucoes",
+        icon: "settings" as const,
+      },
+      {
+        slug: "mobile" as const,
+        href: "/mobile",
+        label: "Mobile",
+        description: "Apps, push e aprovacoes",
+        icon: "scan" as const,
       },
     ],
   },
@@ -231,6 +283,13 @@ export const navigationGroups = [
         label: "Memória",
         description: "Contexto operacional do workspace",
         icon: "brain" as const,
+      },
+      {
+        slug: "market-intelligence" as const,
+        href: "/market-intelligence",
+        label: "Market Intelligence",
+        description: "Sinais, concorrentes e recomendacoes",
+        icon: "globe" as const,
       },
     ],
   },
@@ -764,6 +823,226 @@ export const moduleDefinitions: Record<ModuleDefinition["slug"], ModuleDefinitio
     emptyStateTitle: "A memória do workspace ainda está vazia",
     emptyStateDescription:
       "Conforme você usar a plataforma, decisões, insights e contextos importantes podem ser preservados para orientar a próxima análise.",
+  },
+  "data-cloud": {
+    slug: "data-cloud",
+    label: "Erizon Data Cloud",
+    title: "Data Cloud operacional para comercio",
+    subtitle: "Fontes, metricas, indicadores executivos e modelos preditivos em uma camada unica.",
+    description:
+      "O Data Cloud consolida sinais de pedidos, catalogo, estoque, financeiro, canais, fornecedores e agentes para alimentar decisoes, dashboards e automacoes.",
+    icon: "brain",
+    stage: "Pronto para consolidacao de fontes",
+    quickActions: ["Publicar snapshot", "Mapear fonte", "Treinar modelo"],
+    filters: ["Fonte", "Metrica", "Modelo", "Periodo", "Confianca"],
+    columns: ["Fonte", "Metrica", "Valor", "Tendencia", "Modelo", "Observado em", "Status"],
+    kpis: [
+      {
+        label: "Fontes priorizadas",
+        value: "9 fontes mapeadas",
+        hint: "A cobertura inicial conecta operacao, canais, financeiro e IA.",
+      },
+      {
+        label: "Metricas unificadas",
+        value: "Warehouse preparado",
+        hint: "Snapshots ficam prontos para Executive Center, agentes e API.",
+      },
+      {
+        label: "Predicao",
+        value: "Modelos versionados",
+        hint: "Ruptura, receita, churn e performance podem evoluir sem trocar o core.",
+      },
+    ],
+    aiPrompts: [
+      "Quais fontes ainda estao silenciosas no workspace?",
+      "Quais metricas mudaram de tendencia nos ultimos dias?",
+      "Que modelo merece prioridade para aumentar decisao automatizada?",
+    ],
+    integrations: ["Pedidos", "Estoque", "Financeiro", "Marketplaces", "Fornecedores", "Agentes", "API publica"],
+    guardrails: [
+      "Snapshots sempre pertencem a um workspace.",
+      "Modelos registram versao, horizonte e confianca.",
+      "Sem preencher metricas com dados simulados em producao.",
+    ],
+    emptyStateTitle: "Nenhum dado consolidado ainda",
+    emptyStateDescription:
+      "Publique o primeiro snapshot real para ativar indicadores executivos, modelos preditivos e contexto persistente para os agentes.",
+  },
+  "event-bus": {
+    slug: "event-bus",
+    label: "Erizon Event Bus",
+    title: "Barramento de eventos e reacoes",
+    subtitle: "Event store, webhooks, triggers e fila de entrega para manter a plataforma sincronizada.",
+    description:
+      "O Event Bus transforma mudancas operacionais em eventos auditaveis, permitindo automacoes, notificacoes, integracoes externas e agentes reativos.",
+    icon: "spark",
+    stage: "Pronto para publicar e entregar eventos",
+    quickActions: ["Publicar evento", "Criar webhook", "Configurar trigger"],
+    filters: ["Modulo", "Evento", "Status", "Destino", "Retry"],
+    columns: ["Evento", "Modulo", "Agregado", "Status", "Destino", "Ocorrido em", "Entrega"],
+    kpis: [
+      {
+        label: "Event store",
+        value: "Historico auditavel",
+        hint: "Cada sinal relevante pode ser persistido com payload e origem.",
+      },
+      {
+        label: "Webhooks",
+        value: "Destinos por workspace",
+        hint: "Parceiros e sistemas externos recebem apenas eventos autorizados.",
+      },
+      {
+        label: "Confiabilidade",
+        value: "Retry e fila",
+        hint: "Entregas falhas ficam visiveis para reprocessamento e auditoria.",
+      },
+    ],
+    aiPrompts: [
+      "Quais eventos falharam ou ficaram em retry?",
+      "Que modulos ainda nao estao emitindo sinais?",
+      "Quais triggers devem virar automacoes prioritarias?",
+    ],
+    integrations: ["Automacoes", "Agentes", "Webhooks", "Mobile", "API publica", "Auditoria"],
+    guardrails: [
+      "Eventos sao isolados por workspace.",
+      "Webhooks nao devem expor payload sensivel sem permissao.",
+      "Falhas de entrega ficam rastreaveis em vez de desaparecerem.",
+    ],
+    emptyStateTitle: "Nenhum evento publicado ainda",
+    emptyStateDescription:
+      "Quando pedidos, estoque, financeiro ou agentes emitirem sinais, o barramento passa a mostrar o historico completo e as reacoes conectadas.",
+  },
+  "market-intelligence": {
+    slug: "market-intelligence",
+    label: "Erizon Market Intelligence",
+    title: "Inteligencia de mercado e concorrencia",
+    subtitle: "Sinais externos, watchlist competitiva e recomendacoes acionaveis por canal e categoria.",
+    description:
+      "O modulo cruza tendencias, concorrentes e oportunidades com a realidade interna de margem, estoque e capacidade operacional.",
+    icon: "globe",
+    stage: "Pronto para sinais externos",
+    quickActions: ["Cadastrar fonte", "Monitorar concorrente", "Publicar recomendacao"],
+    filters: ["Fonte", "Categoria", "Direcao", "Prioridade", "Concorrente"],
+    columns: ["Sinal", "Fonte", "Categoria", "Score", "Direcao", "Recomendacao", "Observado em"],
+    kpis: [
+      {
+        label: "Sinais de mercado",
+        value: "Pipeline preparado",
+        hint: "Tendencias podem alimentar Growth, Pricing e Executive Center.",
+      },
+      {
+        label: "Watchlist",
+        value: "Concorrentes rastreaveis",
+        hint: "Acompanhamento explicito evita decisoes baseadas em percepcao solta.",
+      },
+      {
+        label: "Recomendacoes",
+        value: "Priorizacao por impacto",
+        hint: "Cada recomendacao pode carregar confianca, status e acao sugerida.",
+      },
+    ],
+    aiPrompts: [
+      "Quais sinais externos merecem acao nesta semana?",
+      "Que concorrente esta pressionando preco ou sortimento?",
+      "Onde existe oportunidade de crescimento com estoque disponivel?",
+    ],
+    integrations: ["Marketplaces", "Catalogo", "Pricing Agent", "Growth Agent", "Data Cloud"],
+    guardrails: [
+      "Sinais externos nao substituem dado financeiro real.",
+      "Recomendacoes devem explicitar fonte, confianca e impacto esperado.",
+      "Watchlists ficam por workspace.",
+    ],
+    emptyStateTitle: "Nenhum sinal de mercado consolidado",
+    emptyStateDescription:
+      "Cadastre fontes e concorrentes relevantes para transformar inteligencia externa em decisao conectada ao seu estoque, margem e canais.",
+  },
+  automations: {
+    slug: "automations",
+    label: "Erizon Automations",
+    title: "Motor de automacoes com governanca",
+    subtitle: "Regras, playbooks e execucoes auditaveis para reduzir trabalho manual sem perder controle.",
+    description:
+      "Automacoes conectam Event Bus, agentes, notificacoes e aprovacoes humanas para responder a ruptura, margem, queda de receita e operacoes sensiveis.",
+    icon: "settings",
+    stage: "Pronto para regras do workspace",
+    quickActions: ["Criar regra", "Ativar playbook", "Revisar execucoes"],
+    filters: ["Modulo", "Gatilho", "Status", "Prioridade", "Ultima execucao"],
+    columns: ["Regra", "Gatilho", "Modulo", "Acao", "Status", "Ultima execucao", "Resultado"],
+    kpis: [
+      {
+        label: "Playbooks",
+        value: "Fluxos iniciais mapeados",
+        hint: "Estoque baixo, margem comprimida e queda de faturamento ja tem trilhas claras.",
+      },
+      {
+        label: "Auditoria",
+        value: "Execucoes persistidas",
+        hint: "Cada disparo guarda status, payload e resultado esperado.",
+      },
+      {
+        label: "Controle humano",
+        value: "Aprovacoes previstas",
+        hint: "Acoes sensiveis podem exigir confirmacao antes de impacto operacional.",
+      },
+    ],
+    aiPrompts: [
+      "Que regra automatizaria mais trabalho manual hoje?",
+      "Quais automacoes falharam ou precisam revisao?",
+      "Onde devo exigir aprovacao humana antes de executar?",
+    ],
+    integrations: ["Event Bus", "Agentes", "Mobile", "Estoque", "Financeiro", "Fornecedores"],
+    guardrails: [
+      "Automacoes sao habilitadas por workspace.",
+      "Acoes criticas devem ser auditaveis e reversiveis quando possivel.",
+      "Sem executar mudancas externas sem credencial e autorizacao adequada.",
+    ],
+    emptyStateTitle: "Nenhuma regra criada ainda",
+    emptyStateDescription:
+      "Comece com playbooks de baixo risco e alto impacto para notificar, priorizar e preparar acoes antes de automatizar execucao critica.",
+  },
+  mobile: {
+    slug: "mobile",
+    label: "Erizon Mobile",
+    title: "Camada mobile para decisao e operacao rapida",
+    subtitle: "Dispositivos, push, aprovacoes e superficies essenciais para o app React Native.",
+    description:
+      "A area mobile aproveita o mesmo backend, permissoes, API publica e contexto do workspace para evitar um produto paralelo.",
+    icon: "scan",
+    stage: "Pronto para contratos mobile",
+    quickActions: ["Registrar dispositivo", "Enviar push", "Abrir aprovacao"],
+    filters: ["Plataforma", "Push", "Versao", "Status", "Ultimo acesso"],
+    columns: ["Dispositivo", "Plataforma", "Versao", "Push", "Aprovacao", "Ultimo acesso", "Status"],
+    kpis: [
+      {
+        label: "Dispositivos",
+        value: "Registro preparado",
+        hint: "Cada device fica associado ao workspace e ao usuario autorizado.",
+      },
+      {
+        label: "Push",
+        value: "Alertas por contexto",
+        hint: "Notificacoes podem nascer de eventos, agentes e automacoes.",
+      },
+      {
+        label: "Aprovacoes",
+        value: "Fila operacional",
+        hint: "Decisoes de compra, preco e campanha podem ser resolvidas no app.",
+      },
+    ],
+    aiPrompts: [
+      "Quais decisoes precisam aprovacao mobile hoje?",
+      "Que alerta executivo deve virar push prioritario?",
+      "Quais usuarios ou dispositivos estao inativos?",
+    ],
+    integrations: ["API publica", "Event Bus", "Automacoes", "Executive Center", "Agentes", "Billing"],
+    guardrails: [
+      "Mobile deve respeitar as mesmas permissoes do app web.",
+      "Push nao deve carregar dados sensiveis sem necessidade.",
+      "Aprovacoes precisam de trilha de auditoria.",
+    ],
+    emptyStateTitle: "Nenhum dispositivo mobile registrado",
+    emptyStateDescription:
+      "Quando o app conectar o primeiro device, esta area passa a mostrar readiness, push, versoes e decisoes pendentes do workspace.",
   },
 };
 
