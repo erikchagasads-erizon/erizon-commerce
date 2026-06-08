@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #0c0a09;
+  --background-2: #111009;
+  --surface: rgba(20, 18, 14, 0.95);
+  --surface-alt: rgba(28, 25, 18, 0.97);
+  --border: rgba(255, 255, 255, 0.08);
+  --text-main: #fafaf8;
+  --text-soft: #8a8478;
+  --accent: #f97316;
+  --accent-2: #ea580c;
+  --accent-light: rgba(249, 115, 22, 0.12);
+  --mint: #fb923c;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #0c0a09;
+  color: var(--text-main);
+  font-family: "Inter", "Aptos", "Segoe UI Variable Text", "Segoe UI", sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: rgba(249, 115, 22, 0.35);
+  color: white;
+}
+
+.erizon-grid {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), transparent 90%);
+}
+
+.erizon-panel {
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(16, 14, 10, 0.98);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.04) inset, 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.erizon-gradient-text {
+  background: linear-gradient(90deg, #f97316, #fb923c, #fdba74);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.erizon-dot {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(80px);
+  opacity: 0.18;
+}
+
+.erizon-empty-dash {
+  border-style: dashed;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(249, 115, 22, 0.3);
+  border-radius: 2px;
+}
