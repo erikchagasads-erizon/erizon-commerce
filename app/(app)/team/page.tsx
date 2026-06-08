@@ -16,12 +16,11 @@ export default async function TeamPage() {
 
   return (
     <div className="space-y-6">
-      <section className="border border-white/7 bg-[#100e0a] rounded-2xl p-6 sm:p-8">
-        <Badge>Times e Permissões</Badge>
-        <h1 className="mt-5 text-3xl font-semibold sm:text-4xl">Controle de acesso por workspace, papel e convite.</h1>
+      <section className="rounded-2xl border border-white/7 bg-[#100e0a] p-6 sm:p-8">
+        <Badge>Time</Badge>
+        <h1 className="mt-5 text-3xl font-semibold sm:text-4xl">Convide pessoas e controle quem opera a empresa.</h1>
         <p className="mt-4 max-w-3xl text-base leading-7 text-[var(--text-soft)]">
-          O time opera por workspace com isolamento via RLS. Convites expiram, os papéis são aplicados na UI e o backend
-          mantém o escopo do workspace como fronteira obrigatória.
+          Dê acesso ao time certo para cuidar de pedidos, produtos, estoque, financeiro e inteligência.
         </p>
       </section>
 
@@ -32,7 +31,7 @@ export default async function TeamPage() {
               <Users className="h-5 w-5 text-orange-400" />
               Convidar novo membro
             </CardTitle>
-            <CardDescription>Defina o papel inicial e deixe o convite expirar automaticamente em 7 dias.</CardDescription>
+            <CardDescription>Escolha a função inicial e envie o convite para a pessoa certa.</CardDescription>
           </CardHeader>
           <CardContent>
             <TeamInviteForm />
@@ -42,7 +41,7 @@ export default async function TeamPage() {
         <Card>
           <CardHeader>
             <CardTitle>Membros atuais</CardTitle>
-            <CardDescription>Leitura real dos membros já vinculados ao workspace.</CardDescription>
+            <CardDescription>Pessoas que já fazem parte da operação.</CardDescription>
           </CardHeader>
           <CardContent className="space-y-3">
             {team.members.length > 0 ? (
@@ -62,7 +61,7 @@ export default async function TeamPage() {
               ))
             ) : (
               <div className="rounded-xl border border-dashed border-white/8 bg-white/3 p-6 text-sm leading-6 text-[var(--text-soft)]">
-                Nenhum membro adicional ainda. O owner inicial já pode começar a convidar o time por aqui.
+                Nenhum membro adicional ainda. Convide seu time para dividir a operação.
               </div>
             )}
           </CardContent>
@@ -72,7 +71,7 @@ export default async function TeamPage() {
       <Card>
         <CardHeader>
           <CardTitle>Convites pendentes</CardTitle>
-          <CardDescription>Convites ativos, expirados ou aceitos dentro do mesmo workspace.</CardDescription>
+          <CardDescription>Acompanhe quem ainda precisa aceitar o convite.</CardDescription>
         </CardHeader>
         <CardContent className="space-y-3">
           {team.invites.length > 0 ? (
@@ -82,7 +81,7 @@ export default async function TeamPage() {
                   <div>
                     <p className="text-sm font-medium text-white">{invite.email}</p>
                     <p className="mt-1 text-xs uppercase tracking-[0.16em] text-stone-500">
-                      {roleLabels[invite.role]} • {invite.status}
+                      {roleLabels[invite.role]} - {invite.status}
                     </p>
                   </div>
                   <p className="text-xs text-stone-600">Expira em {formatDateTime(invite.expiresAt)}</p>
@@ -91,7 +90,7 @@ export default async function TeamPage() {
             ))
           ) : (
             <div className="rounded-xl border border-dashed border-white/8 bg-white/3 p-6 text-sm leading-6 text-[var(--text-soft)]">
-              Ainda não há convites emitidos neste workspace.
+              Ainda não há convites pendentes.
             </div>
           )}
         </CardContent>
@@ -99,4 +98,3 @@ export default async function TeamPage() {
     </div>
   );
 }
-

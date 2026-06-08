@@ -18,7 +18,7 @@ export async function signInAction(
 ): Promise<AuthActionState> {
   if (!hasSupabaseEnv) {
     return {
-      error: "Configure o Supabase antes de autenticar usuários.",
+      error: "O acesso ainda não está ativo para esta instalação.",
     };
   }
 
@@ -75,7 +75,7 @@ export async function signUpAction(
 ): Promise<AuthActionState> {
   if (!hasSupabaseEnv) {
     return {
-      error: "Configure o Supabase antes de criar contas.",
+      error: "A criação de contas ainda não está ativa para esta instalação.",
     };
   }
 
@@ -87,7 +87,7 @@ export async function signUpAction(
 
   if (!parsed.success) {
     return {
-      error: parsed.error.issues[0]?.message ?? "Preencha nome, email e senha para criar o workspace inicial.",
+      error: parsed.error.issues[0]?.message ?? "Preencha nome, email e senha para criar sua conta.",
     };
   }
 

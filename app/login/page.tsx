@@ -1,27 +1,22 @@
-import { ArrowRight, ShieldCheck, Sparkles, Workflow } from "lucide-react";
+import { ArrowRight, Package2, ShoppingBag, Sparkles, Wallet } from "lucide-react";
 import { redirect } from "next/navigation";
 
 import { AuthForm } from "@/components/auth/auth-form";
 import { Badge } from "@/components/ui/badge";
-import { buttonStyles } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { executiveQuestions, settingsHighlights } from "@/lib/modules";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getAppContext } from "@/lib/auth";
-import { missingSupabaseEnv } from "@/lib/env";
-import Link from "next/link";
 
 export default async function LoginPage() {
   const context = await getAppContext();
 
   if (context.isSupabaseConfigured && context.session) {
-    redirect("/dashboard");
+    redirect("/integrations");
   }
 
   return (
     <main className="min-h-screen bg-[#0c0a09]">
       <div className="erizon-grid absolute inset-0" />
 
-      {/* Top nav */}
       <div className="relative border-b border-white/6 px-8 py-4">
         <div className="mx-auto flex max-w-7xl items-center justify-between">
           <div className="flex items-center gap-2.5">
@@ -36,34 +31,38 @@ export default async function LoginPage() {
 
       <div className="relative mx-auto max-w-7xl px-6 py-16 lg:px-8">
         <div className="grid gap-16 lg:grid-cols-[1.1fr,0.9fr]">
-          {/* Left: hero + features */}
           <div>
             <p className="text-xs font-medium uppercase tracking-[0.2em] text-orange-500">
-              O Sistema Operacional de Comércio
+              O sistema operacional do comércio
             </p>
             <h1 className="mt-4 text-5xl font-bold leading-[1.1] tracking-tight text-white sm:text-6xl">
-              Opere, cresça e decida com inteligência.
+              Conecte seus canais. Controle sua operação. Cresça com inteligência.
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-7 text-stone-400">
-              ERP, OMS, WMS, estoque, financeiro, fiscal, fornecedores e agentes de IA trabalhando no mesmo workspace.
+              A Erizon reúne produtos, pedidos, estoque, marketplaces, financeiro e IA em uma experiência premium para o dono do negócio.
             </p>
 
-            <div className="mt-10 grid gap-4 sm:grid-cols-3">
+            <div className="mt-10 grid gap-4 sm:grid-cols-2">
               {[
                 {
-                  icon: ShieldCheck,
-                  title: "Workspace isolado",
-                  text: "RLS por workspace e criação automática no primeiro login.",
+                  icon: ShoppingBag,
+                  title: "Pedidos em um só lugar",
+                  text: "Veja Mercado Livre, Shopee e site próprio na mesma visão.",
                 },
                 {
-                  icon: Workflow,
-                  title: "Omnichannel",
-                  text: "Pedidos, catálogo, estoque e financeiro sem duplicidade.",
+                  icon: Package2,
+                  title: "Produtos e estoque conectados",
+                  text: "Evite vender sem saldo e encontre itens parados.",
+                },
+                {
+                  icon: Wallet,
+                  title: "Resultado financeiro claro",
+                  text: "Acompanhe caixa, margem e recebimentos sem planilhas soltas.",
                 },
                 {
                   icon: Sparkles,
-                  title: "IA especializada",
-                  text: "Agentes com memória empresarial focados em margem e crescimento.",
+                  title: "Erizon AI",
+                  text: "Receba alertas e próximos passos para vender melhor.",
                 },
               ].map((item) => (
                 <div key={item.title} className="rounded-xl border border-white/7 bg-white/3 p-5">
@@ -74,86 +73,31 @@ export default async function LoginPage() {
               ))}
             </div>
 
-            <div className="mt-10 grid gap-6 lg:grid-cols-2">
-              <div>
-                <p className="mb-3 text-xs font-medium uppercase tracking-[0.16em] text-stone-600">
-                  Perguntas que a central executiva responde
-                </p>
-                <div className="space-y-1.5">
-                  {executiveQuestions.map((question) => (
-                    <div
-                      key={question}
-                      className="rounded-lg border border-white/6 bg-white/3 px-3.5 py-2.5 text-xs leading-5 text-stone-400"
-                    >
-                      {question}
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <p className="mb-3 text-xs font-medium uppercase tracking-[0.16em] text-stone-600">
-                  O que já vem preparado
-                </p>
-                <div className="space-y-1.5">
-                  {settingsHighlights.map((item) => (
-                    <div
-                      key={item}
-                      className="rounded-lg border border-white/6 bg-white/3 px-3.5 py-2.5 text-xs leading-5 text-stone-400"
-                    >
-                      {item}
-                    </div>
-                  ))}
+            <div className="mt-10 rounded-2xl border border-orange-500/15 bg-orange-500/5 p-5">
+              <div className="flex items-start gap-3">
+                <ArrowRight className="mt-1 h-5 w-5 text-orange-400" />
+                <div>
+                  <p className="font-medium text-white">O primeiro passo é conectar seus canais de venda.</p>
+                  <p className="mt-1 text-sm leading-6 text-stone-400">
+                    Depois disso, a Erizon começa a importar pedidos, produtos e sinais para transformar dados em decisão.
+                  </p>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Right: auth */}
           <div className="space-y-4">
-            {context.isSupabaseConfigured ? (
-              <AuthForm />
-            ) : (
+            <AuthForm />
+            {!context.isSupabaseConfigured ? (
               <Card className="border-amber-500/15 bg-amber-500/5">
                 <CardHeader>
-                  <CardTitle>Configuração inicial pendente</CardTitle>
-                  <CardDescription>
-                    O layout e a arquitetura já estão prontos, mas a autenticação depende do Supabase.
-                  </CardDescription>
+                  <CardTitle>Acesso de demonstração</CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="rounded-lg border border-amber-500/20 bg-amber-500/8 p-3.5 text-sm text-amber-200/80">
-                    Variáveis ausentes: {missingSupabaseEnv.join(", ")}.
-                  </div>
-                  <p className="text-sm leading-6 text-stone-500">
-                    Preencha o arquivo <code className="text-orange-400">.env.local</code> a partir de{" "}
-                    <code className="text-orange-400">.env.example</code>.
-                  </p>
-                  <Link className={buttonStyles({ variant: "secondary" })} href="/executive-center">
-                    Explorar a base criada
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
+                <CardContent className="text-sm leading-6 text-amber-200/80">
+                  A plataforma pode ser explorada, mas os dados reais entram quando a conta da empresa estiver ativa.
                 </CardContent>
               </Card>
-            )}
-
-            <Card>
-              <CardHeader>
-                <CardTitle>Sequência de implantação</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-1.5">
-                {[
-                  "1. Configurar projeto Supabase e aplicar a migração inicial.",
-                  "2. Definir URL e chave pública no ambiente do Next.js.",
-                  "3. Criar o primeiro usuário e validar a criação do workspace.",
-                  "4. Conectar catálogo, estoque e canais prioritários.",
-                ].map((step) => (
-                  <div key={step} className="rounded-lg border border-white/6 bg-white/3 px-3.5 py-2.5 text-xs text-stone-400">
-                    {step}
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
+            ) : null}
           </div>
         </div>
       </div>

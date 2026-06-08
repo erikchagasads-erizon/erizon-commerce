@@ -30,7 +30,7 @@ export const planDefinitions: PlanDefinition[] = [
   {
     code: "starter",
     description: "Para começar a unificar catálogo, pedidos e IA com disciplina.",
-    features: ["1 workspace", "Até 500 produtos", "Até 1.000 pedidos/mês", "1 marketplace", "Chat AI limitado"],
+    features: ["1 empresa", "Até 500 produtos", "Até 1.000 pedidos/mês", "1 marketplace", "Perguntas para IA limitadas"],
     limits: {
       aiMessagesPerMonth: 40,
       marketPlaces: 1,
@@ -57,8 +57,8 @@ export const planDefinitions: PlanDefinition[] = [
   },
   {
     code: "scale",
-    description: "Para operações multiempresa com API, automações e white label.",
-    features: ["Multiempresa", "White label", "API pública", "Automações", "IA avançada"],
+    description: "Para operações multiempresa com marca própria, rotinas inteligentes e IA avançada.",
+    features: ["Multiempresa", "Marca própria", "Integrações avançadas", "Rotinas inteligentes", "IA avançada"],
     limits: {
       aiMessagesPerMonth: 2000,
       marketPlaces: null,

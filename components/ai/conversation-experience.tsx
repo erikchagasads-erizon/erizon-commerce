@@ -108,7 +108,7 @@ export function ConversationExperience({
             ...initialReply,
             title: "Falha de comunicação com a camada de IA",
             summary:
-              "A interface do chat continua pronta, mas a requisição não voltou com resposta utilizável. Revise a configuração do endpoint e tente novamente.",
+              "A conversa está pronta, mas a resposta não voltou como esperado. Tente novamente em instantes.",
             provider: "fallback",
             model: "network-error",
           },
@@ -233,4 +233,3 @@ export function ConversationExperience({
     </div>
   );
 }
-

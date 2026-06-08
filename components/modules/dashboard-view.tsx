@@ -1,12 +1,10 @@
 import Link from "next/link";
-import { ArrowRight, LineChart, Package2, ShoppingBag, Sparkles, Truck, Wallet } from "lucide-react";
+import { ArrowRight, BadgeDollarSign, LineChart, Package2, ShoppingBag, Sparkles, Truck, Wallet } from "lucide-react";
 
-import type { AppContext } from "@/lib/auth";
-import { executiveQuestions, moduleDefinitions } from "@/lib/modules";
-import { formatCurrency, formatDateTime } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { buttonStyles } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { formatCurrency, formatDateTime } from "@/lib/utils";
 
 interface DashboardMetric {
   label: string;
@@ -36,72 +34,70 @@ const metricIcons = {
   suppliers: Truck,
 };
 
+const resultCards = [
+  {
+    title: "Receita protegida",
+    text: "Acompanhe pedidos, pagamentos e canais para agir antes que venda vire problema.",
+    icon: BadgeDollarSign,
+  },
+  {
+    title: "Estoque sob controle",
+    text: "Veja produtos parados, risco de falta e oportunidades de reposição com clareza.",
+    icon: Package2,
+  },
+  {
+    title: "Decisão com IA",
+    text: "A Erizon AI prioriza alertas e recomenda próximos passos para crescer com margem.",
+    icon: Sparkles,
+  },
+];
+
 export function DashboardView({
-  context,
   metrics,
   recentInsights,
   recentOrders,
 }: {
-  context: AppContext;
   metrics: DashboardMetric[];
   recentInsights: DashboardInsight[];
   recentOrders: DashboardOrder[];
 }) {
   return (
     <div className="space-y-6">
-      <section className="border border-white/7 bg-[#100e0a] rounded-2xl p-6 sm:p-8">
-        <div className="grid gap-6 xl:grid-cols-[1.2fr,0.8fr]">
+      <section className="rounded-2xl border border-white/7 bg-[#100e0a] p-6 sm:p-8">
+        <div className="grid gap-6 xl:grid-cols-[1.15fr,0.85fr]">
           <div>
-            <Badge>Central Executiva Erizon</Badge>
+            <Badge>Resultados do comércio</Badge>
             <h1 className="mt-5 text-3xl font-semibold leading-tight sm:text-4xl">
-              Leia o negócio por inteiro antes de agir em cada módulo.
+              Tudo que importa para vender mais, perder menos e decidir melhor.
             </h1>
             <p className="mt-4 max-w-3xl text-base leading-7 text-[var(--text-soft)]">
-              Esta central foi montada para sintetizar pedidos, catálogo, estoque, financeiro, fiscal, fornecedores e
-              sinais dos agentes em uma visão de decisão executiva.
+              Acompanhe vendas, catálogo, estoque, caixa e alertas inteligentes em uma visão simples para o dono do negócio.
             </p>
 
-            <div className="mt-5 flex flex-wrap gap-3">
-              <Link className={buttonStyles({})} href="/executive-center">
-                Abrir Executive Center
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Link className={buttonStyles({})} href="/integrations">
+                Conectar canais
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
-              <Link className={buttonStyles({ variant: "secondary" })} href="/agents/executive">
-                Conversar com o Executive Agent
+              <Link className={buttonStyles({ variant: "secondary" })} href="/executive-center">
+                Perguntar à Erizon AI
               </Link>
-            </div>
-
-            <div className="mt-8 grid gap-3 md:grid-cols-3">
-              {executiveQuestions.map((question) => (
-                <div key={question} className="rounded-xl border border-white/7 bg-white/3 p-4 text-sm leading-6">
-                  {question}
-                </div>
-              ))}
             </div>
           </div>
 
-          <Card className="bg-orange-500/8 border-orange-500/15">
-            <CardHeader>
-              <CardTitle>Pulso do workspace</CardTitle>
-              <CardDescription>
-                {context.workspace
-                  ? `Workspace ativo: ${context.workspace.name}`
-                  : "Quando o primeiro workspace estiver provisionado, a operação passa a consolidar dados aqui."}
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-3 text-sm text-stone-200">
-              <div className="rounded-2xl border border-white/10 bg-white/3 p-4">
-                O dashboard não força dados fictícios. Ele já está pronto para refletir o que vier da sua operação real.
+          <div className="grid gap-3">
+            {resultCards.map((item) => (
+              <div key={item.title} className="rounded-xl border border-white/7 bg-white/3 p-4">
+                <div className="flex items-start gap-3">
+                  <item.icon className="mt-0.5 h-5 w-5 text-orange-400" />
+                  <div>
+                    <h2 className="text-sm font-semibold text-white">{item.title}</h2>
+                    <p className="mt-1 text-sm leading-6 text-[var(--text-soft)]">{item.text}</p>
+                  </div>
+                </div>
               </div>
-              <div className="rounded-2xl border border-white/10 bg-white/3 p-4">
-                A criação automática de workspace e o RLS por workspace garantem isolamento desde o primeiro login.
-              </div>
-              <Link className={buttonStyles({})} href="/settings">
-                Revisar configuração crítica
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </CardContent>
-          </Card>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -127,8 +123,8 @@ export function DashboardView({
       <section className="grid gap-6 xl:grid-cols-[1.15fr,0.85fr]">
         <Card>
           <CardHeader>
-            <CardTitle>Visão operacional recente</CardTitle>
-            <CardDescription>Pedidos mais recentes capturados pelo OMS do workspace.</CardDescription>
+            <CardTitle>Pedidos recentes</CardTitle>
+            <CardDescription>As últimas vendas importadas dos seus canais aparecem aqui.</CardDescription>
           </CardHeader>
           <CardContent>
             {recentOrders.length > 0 ? (
@@ -149,10 +145,9 @@ export function DashboardView({
               </div>
             ) : (
               <div className="rounded-2xl border border-dashed border-white/8 bg-white/3 p-8">
-                <h3 className="text-lg font-medium">Ainda não há pedidos recentes</h3>
+                <h3 className="text-lg font-medium">Conecte um canal para ver pedidos</h3>
                 <p className="mt-3 max-w-2xl text-sm leading-7 text-[var(--text-soft)]">
-                  Quando canais, e-commerce ou PDV começarem a enviar pedidos, este painel passa a refletir a operação em
-                  tempo real.
+                  Comece por Mercado Livre, Shopee ou site próprio. Depois disso, suas vendas entram automaticamente nesta visão.
                 </p>
               </div>
             )}
@@ -161,8 +156,8 @@ export function DashboardView({
 
         <Card>
           <CardHeader>
-            <CardTitle>Insights dos agentes</CardTitle>
-            <CardDescription>Sinais estratégicos e operacionais gerados para o workspace.</CardDescription>
+            <CardTitle>Alertas inteligentes</CardTitle>
+            <CardDescription>A Erizon AI mostra riscos e oportunidades quando há dados suficientes.</CardDescription>
           </CardHeader>
           <CardContent>
             {recentInsights.length > 0 ? (
@@ -180,10 +175,9 @@ export function DashboardView({
               </div>
             ) : (
               <div className="rounded-2xl border border-dashed border-white/8 bg-white/3 p-8">
-                <h3 className="text-lg font-medium">Nenhum insight gerado ainda</h3>
+                <h3 className="text-lg font-medium">Nenhum alerta por enquanto</h3>
                 <p className="mt-3 text-sm leading-7 text-[var(--text-soft)]">
-                  Assim que dados reais começarem a entrar, os agentes poderão responder sobre margem, ruptura, compra,
-                  fiscal e crescimento.
+                  Assim que produtos e pedidos entrarem, a Erizon AI poderá indicar falta de estoque, queda de margem e oportunidades de compra.
                 </p>
               </div>
             )}
@@ -191,58 +185,29 @@ export function DashboardView({
         </Card>
       </section>
 
-      <section className="grid gap-6 xl:grid-cols-[0.8fr,1.2fr]">
-        <Card>
-          <CardHeader>
-            <CardTitle>Leituras executivas sugeridas</CardTitle>
-            <CardDescription>Use estas frentes para priorizar o rollout do sistema.</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            {[
-              "Catálogo e estoque são a fundação para OMS, marketplace, e-commerce e PDV.",
-              "Financeiro e fiscal ganham valor exponencial quando alimentados por dados de pedidos reais.",
-              "Fornecedores e agentes destravam decisões de reposição e rentabilidade.",
-            ].map((item) => (
-              <div key={item} className="rounded-2xl border border-white/7 bg-white/3 px-4 py-3 text-sm leading-6">
-                {item}
-              </div>
-            ))}
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <CardTitle>Mapa dos módulos</CardTitle>
-              <CardDescription>
-                Cada área já existe como rota e estrutura de produto, pronta para receber dados e integrações.
-              </CardDescription>
+      <Card>
+        <CardHeader className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <CardTitle>Prioridades recomendadas</CardTitle>
+            <CardDescription>O caminho mais curto para transformar a Erizon no centro da operação.</CardDescription>
+          </div>
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/3 px-3 py-1 text-xs uppercase tracking-[0.18em] text-stone-400">
+            <LineChart className="h-4 w-4 text-orange-400" />
+            Foco em resultado
+          </div>
+        </CardHeader>
+        <CardContent className="grid gap-3 md:grid-cols-3">
+          {[
+            "Conecte Mercado Livre e Shopee para importar vendas e catálogo.",
+            "Revise produtos sem preço, custo ou estoque confiável.",
+            "Ative a Erizon AI para receber alertas de margem, ruptura e crescimento.",
+          ].map((item) => (
+            <div key={item} className="rounded-xl border border-white/7 bg-white/3 p-4 text-sm leading-6 text-[var(--text-soft)]">
+              {item}
             </div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/3 px-3 py-1 text-xs uppercase tracking-[0.18em] text-stone-400">
-              <LineChart className="h-4 w-4 text-orange-400" />
-              Rollout prioritário
-            </div>
-          </CardHeader>
-          <CardContent className="grid gap-3 md:grid-cols-2">
-            {Object.values(moduleDefinitions).map((module) => (
-              <Link
-                key={module.slug}
-                className="rounded-xl border border-white/7 bg-white/3 p-4 transition hover:border-white/10 hover:bg-white/4"
-                href={`/${module.slug}`}
-              >
-                <div className="flex items-start justify-between gap-3">
-                  <div>
-                    <p className="text-xs uppercase tracking-[0.2em] text-orange-400">{module.label}</p>
-                    <h3 className="mt-2 text-base font-medium">{module.title}</h3>
-                  </div>
-                  <Sparkles className="h-5 w-5 text-stone-500" />
-                </div>
-                <p className="mt-3 text-sm leading-6 text-[var(--text-soft)]">{module.stage}</p>
-              </Link>
-            ))}
-          </CardContent>
-        </Card>
-      </section>
+          ))}
+        </CardContent>
+      </Card>
     </div>
   );
 }

@@ -1,10 +1,10 @@
 import type { ReactNode } from "react";
 
-import type { AppContext } from "@/lib/auth";
 import { ErizonCopilot } from "@/components/copilot/erizon-copilot";
 import { Sidebar } from "@/components/layout/sidebar";
 import { Topbar } from "@/components/layout/topbar";
 import { Card, CardContent } from "@/components/ui/card";
+import type { AppContext } from "@/lib/auth";
 import type { WorkspaceSnapshot } from "@/lib/workspace-data";
 
 export function AppShell({
@@ -19,8 +19,8 @@ export function AppShell({
   return (
     <div className="relative min-h-screen bg-[#0c0a09]">
       <Sidebar
-        userLabel={context.profile?.email ?? "Sem sessão autenticada"}
-        workspaceName={context.workspace?.name ?? "Preview do produto"}
+        userLabel={context.profile?.email ?? "Acesso de demonstração"}
+        workspaceName={context.workspace?.name ?? "Minha empresa"}
       />
 
       <div className="flex min-h-screen flex-col lg:pl-[260px]">
@@ -29,8 +29,7 @@ export function AppShell({
           {!context.isSupabaseConfigured ? (
             <Card className="mb-6 border-amber-500/15 bg-amber-500/5">
               <CardContent className="p-4 text-sm leading-6 text-amber-300/80">
-                O shell da plataforma está funcional, mas a autenticação e os dados reais dependem da configuração do
-                Supabase no ambiente.
+                A demonstração está aberta. Para ver seus dados reais, conecte a conta da empresa e os canais de venda.
               </CardContent>
             </Card>
           ) : null}
@@ -38,8 +37,7 @@ export function AppShell({
           {context.isSupabaseConfigured && context.session && !context.workspace ? (
             <Card className="mb-6 border-amber-500/15 bg-amber-500/5">
               <CardContent className="p-4 text-sm leading-6 text-amber-300/80">
-                Sessão criada, mas nenhum workspace foi encontrado. A função de fallback tentará provisionar um
-                automaticamente após a migração ser aplicada.
+                Estamos preparando sua empresa. Em instantes, você poderá conectar canais e importar dados.
               </CardContent>
             </Card>
           ) : null}

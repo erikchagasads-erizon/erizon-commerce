@@ -29,7 +29,7 @@ export async function createInviteAction(
 
   if (!context.workspace?.workspaceId || !context.session?.user.id) {
     return {
-      error: "Workspace indisponível para criar convites.",
+      error: "Empresa indisponível para criar convites.",
     };
   }
 
@@ -91,7 +91,7 @@ export async function saveWhiteLabelAction(
 
   if (!context.workspace?.workspaceId || !context.session?.user.id) {
     return {
-      error: "Workspace indisponível para salvar a identidade do ambiente.",
+      error: "Empresa indisponível para salvar a identidade visual.",
     };
   }
 
@@ -170,7 +170,7 @@ export async function createApiKeyAction(
 
   if (!context.workspace?.workspaceId || !context.session?.user.id) {
     return {
-      error: "Workspace indisponível para emitir chaves.",
+      error: "Empresa indisponível para concluir esta ação.",
     };
   }
 
@@ -255,4 +255,3 @@ export async function revokeApiKeyAction(formData: FormData) {
 
   revalidatePath("/developer-api");
 }
-

@@ -29,14 +29,14 @@ export function AuthForm() {
       <Card>
         <CardHeader>
           <CardTitle>Entrar</CardTitle>
-          <CardDescription>Acesse seu workspace para acompanhar pedidos, estoque e agentes.</CardDescription>
+          <CardDescription>Acesse sua empresa para acompanhar vendas, estoque e resultados.</CardDescription>
         </CardHeader>
         <CardContent>
           <form action={signInFormAction} className="space-y-3">
             <Input autoComplete="email" name="email" placeholder="voce@empresa.com" type="email" />
             <Input autoComplete="current-password" name="password" placeholder="Senha" type="password" />
             {signInState.error ? <p className="text-xs text-red-400">{signInState.error}</p> : null}
-            <SubmitButton idleLabel="Entrar" loadingLabel="Validando..." />
+            <SubmitButton idleLabel="Entrar" loadingLabel="Entrando..." />
           </form>
         </CardContent>
       </Card>
@@ -44,9 +44,7 @@ export function AuthForm() {
       <Card className="border-orange-500/15">
         <CardHeader>
           <CardTitle>Criar conta</CardTitle>
-          <CardDescription>
-            No primeiro acesso, a plataforma cria seu workspace e configura o isolamento automaticamente.
-          </CardDescription>
+          <CardDescription>Crie sua empresa na Erizon e comece conectando seus canais de venda.</CardDescription>
         </CardHeader>
         <CardContent>
           <form action={signUpFormAction} className="space-y-3">
@@ -55,7 +53,7 @@ export function AuthForm() {
             <Input autoComplete="new-password" name="password" placeholder="Crie uma senha forte" type="password" />
             {signUpState.error ? <p className="text-xs text-red-400">{signUpState.error}</p> : null}
             {signUpState.success ? <p className="text-xs text-green-400">{signUpState.success}</p> : null}
-            <SubmitButton idleLabel="Criar ambiente" loadingLabel="Criando workspace..." />
+            <SubmitButton idleLabel="Criar conta" loadingLabel="Preparando sua empresa..." />
           </form>
         </CardContent>
       </Card>

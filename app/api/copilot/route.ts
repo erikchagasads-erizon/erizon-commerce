@@ -170,7 +170,7 @@ export async function POST(request: Request) {
             ...buildFallbackReply(payload),
             title: "Limite de IA do plano atingido",
             summary:
-              "O workspace atingiu o volume mensal de mensagens de IA previsto no plano atual. O sistema segue estável, mas novas análises completas exigem upgrade ou reinício do próximo ciclo.",
+              "A empresa atingiu o volume mensal de perguntas para IA previsto no plano atual. A operação segue normal, mas novas análises completas exigem upgrade ou o início do próximo ciclo.",
             actions: [
               {
                 emphasis: "primary",
@@ -180,7 +180,7 @@ export async function POST(request: Request) {
               },
               {
                 emphasis: "secondary",
-                intent: "Auditar consumo e billing do workspace.",
+                intent: "Revisar consumo e assinatura da empresa.",
                 label: "Ver billing",
                 targetModule: "billing",
               },

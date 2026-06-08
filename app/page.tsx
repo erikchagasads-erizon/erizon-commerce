@@ -6,11 +6,11 @@ export default async function HomePage() {
   const context = await getAppContext();
 
   if (!context.isSupabaseConfigured) {
-    redirect("/executive-center");
+    redirect("/integrations");
   }
 
   if (context.session) {
-    redirect("/executive-center");
+    redirect("/integrations");
   }
 
   redirect("/login");

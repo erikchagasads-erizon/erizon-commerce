@@ -1,11 +1,5 @@
-import { AgentsHub } from "@/components/ai/agents-hub";
-import { requireAppContext } from "@/lib/auth";
-import { getWorkspaceSnapshot } from "@/lib/workspace-data";
+import { redirect } from "next/navigation";
 
-export default async function AgentsPage() {
-  const context = await requireAppContext();
-  const snapshot = await getWorkspaceSnapshot(context.workspace?.workspaceId ?? null);
-
-  return <AgentsHub context={context} snapshot={snapshot} />;
+export default function AgentsPage() {
+  redirect("/executive-center");
 }
-

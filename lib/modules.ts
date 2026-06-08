@@ -21,6 +21,7 @@ export type IconKey =
   | "settings";
 
 export type ModuleSlug =
+  | "integrations"
   | "executive-center"
   | "dashboard"
   | "onboarding"
@@ -295,6 +296,94 @@ export const navigationGroups = [
   },
 ];
 
+export const businessNavigationGroups = [
+  {
+    title: "Comece aqui",
+    items: [
+      {
+        slug: "integrations" as const,
+        href: "/integrations",
+        label: "Integrações",
+        description: "Conecte seus canais",
+        icon: "globe" as const,
+      },
+      {
+        slug: "onboarding" as const,
+        href: "/onboarding",
+        label: "Primeiros passos",
+        description: "Ative a operação em ordem",
+        icon: "shield" as const,
+      },
+      {
+        slug: "dashboard" as const,
+        href: "/dashboard",
+        label: "Resultados",
+        description: "Vendas, margem e alertas",
+        icon: "command" as const,
+      },
+    ],
+  },
+  {
+    title: "Operação",
+    items: [
+      {
+        slug: "products" as const,
+        href: "/products",
+        label: "Produtos",
+        description: "Catálogo e preços",
+        icon: "package" as const,
+      },
+      {
+        slug: "orders" as const,
+        href: "/orders",
+        label: "Pedidos",
+        description: "Vendas de todos os canais",
+        icon: "shopping" as const,
+      },
+      {
+        slug: "stock" as const,
+        href: "/stock",
+        label: "Estoque",
+        description: "Saldo, giro e reposição",
+        icon: "boxes" as const,
+      },
+      {
+        slug: "marketplaces" as const,
+        href: "/marketplaces",
+        label: "Marketplaces",
+        description: "Mercado Livre, Shopee e mais",
+        icon: "store" as const,
+      },
+      {
+        slug: "finance" as const,
+        href: "/finance",
+        label: "Financeiro",
+        description: "Caixa, lucro e recebíveis",
+        icon: "wallet" as const,
+      },
+    ],
+  },
+  {
+    title: "Inteligência",
+    items: [
+      {
+        slug: "market-intelligence" as const,
+        href: "/market-intelligence",
+        label: "Inteligência",
+        description: "Oportunidades e riscos",
+        icon: "brain" as const,
+      },
+      {
+        slug: "executive-center" as const,
+        href: "/executive-center",
+        label: "Erizon AI",
+        description: "Assistente do comércio",
+        icon: "bot" as const,
+      },
+    ],
+  },
+];
+
 export const moduleDefinitions: Record<ModuleDefinition["slug"], ModuleDefinition> = {
   orders: {
     slug: "orders",
@@ -317,7 +406,7 @@ export const moduleDefinitions: Record<ModuleDefinition["slug"], ModuleDefinitio
       {
         label: "Eventos rastreáveis",
         value: "Histórico habilitado",
-        hint: "O schema já suporta eventos por pedido e mudanças de status.",
+        hint: "Cada mudança de status fica organizada para consulta e acompanhamento.",
       },
       {
         label: "Pós-venda",
@@ -332,7 +421,7 @@ export const moduleDefinitions: Record<ModuleDefinition["slug"], ModuleDefinitio
     ],
     integrations: ["Mercado Livre", "Shopee", "Amazon", "Magalu", "TikTok Shop", "PDV", "Loja própria"],
     guardrails: [
-      "Cada pedido pertence a um workspace.",
+      "Cada pedido fica separado por empresa.",
       "Eventos operacionais ficam auditáveis.",
       "Estados vazios permanecem honestos até a conexão real dos canais.",
     ],
@@ -376,7 +465,7 @@ export const moduleDefinitions: Record<ModuleDefinition["slug"], ModuleDefinitio
     ],
     integrations: ["XML", "Planilha", "Cadastro manual", "ERP futuro", "Fornecedores"],
     guardrails: [
-      "Catálogo é multiempresa por workspace.",
+      "Catálogo separado por empresa.",
       "SKU e código de barras podem ser indexados para integração oficial.",
       "Nada é pré-populado com dados artificiais.",
     ],
@@ -420,7 +509,7 @@ export const moduleDefinitions: Record<ModuleDefinition["slug"], ModuleDefinitio
     ],
     integrations: ["Código de barras", "XML", "Planilha", "Fornecedores", "WMS"],
     guardrails: [
-      "Todo movimento exige workspace_id.",
+      "Todo movimento fica associado à empresa correta.",
       "Localizações suportam PDV, armazém e trânsito.",
       "A IA só opina sobre dados realmente capturados.",
     ],
@@ -488,7 +577,7 @@ export const moduleDefinitions: Record<ModuleDefinition["slug"], ModuleDefinitio
       {
         label: "Conectores planejados",
         value: "Mercado Livre a Shein",
-        hint: "A plataforma já foi desenhada com foco em integrações oficiais por API.",
+        hint: "A plataforma já foi desenhada para conexões oficiais e confiáveis.",
       },
       {
         label: "Sincronização de catálogo",
@@ -509,7 +598,7 @@ export const moduleDefinitions: Record<ModuleDefinition["slug"], ModuleDefinitio
     integrations: ["Mercado Livre", "Shopee", "Amazon", "Magalu", "TikTok Shop", "Shein"],
     guardrails: [
       "Canais só aparecem com dados reais após autenticação oficial.",
-      "Preço e estoque permanecem centralizados no workspace.",
+      "Preço e estoque permanecem centralizados por empresa.",
       "Sem espelhar anúncio com conteúdo fictício.",
     ],
     emptyStateTitle: "Nenhuma conta de marketplace conectada",
@@ -522,7 +611,7 @@ export const moduleDefinitions: Record<ModuleDefinition["slug"], ModuleDefinitio
     title: "Motor de integração para lojas próprias",
     subtitle: "Pedidos, estoque, financeiro e relatórios centralizados por canal.",
     description:
-      "Conectores preparados para Shopify, WooCommerce, Nuvemshop, Tray, Loja Integrada, VTEX e APIs proprietárias, com evolução futura para a Store Cloud própria.",
+      "Conexões preparadas para Shopify, WooCommerce, Nuvemshop, Tray, Loja Integrada, VTEX e lojas próprias.",
     icon: "globe",
     stage: "Pronto para conectores e Store Cloud",
     quickActions: ["Conectar loja", "Mapear pedidos", "Publicar catálogo"],
@@ -550,7 +639,7 @@ export const moduleDefinitions: Record<ModuleDefinition["slug"], ModuleDefinitio
       "Quais pedidos falharam na sincronização?",
       "Onde vale reforçar o mix da loja própria?",
     ],
-    integrations: ["Shopify", "WooCommerce", "Nuvemshop", "Tray", "Loja Integrada", "VTEX", "APIs próprias"],
+    integrations: ["Shopify", "WooCommerce", "Nuvemshop", "Tray", "Loja Integrada", "VTEX", "Loja própria"],
     guardrails: [
       "Conectores oficiais entram sem mudar a modelagem do produto.",
       "Loja própria divide o mesmo estoque e financeiro.",
@@ -586,7 +675,7 @@ export const moduleDefinitions: Record<ModuleDefinition["slug"], ModuleDefinitio
       {
         label: "Performance de equipe",
         value: "Metas por vendedor",
-        hint: "Comissões e produtividade podem ser acompanhadas por workspace.",
+        hint: "Comissões e produtividade podem ser acompanhadas por empresa.",
       },
     ],
     aiPrompts: [
@@ -641,7 +730,7 @@ export const moduleDefinitions: Record<ModuleDefinition["slug"], ModuleDefinitio
     integrations: ["Pedidos", "PDV", "Marketplaces", "Bancos", "Fornecedores", "Fiscal"],
     guardrails: [
       "Sem números inventados no dashboard.",
-      "Transações pertencem a um workspace e podem ser auditadas.",
+      "Transações ficam separadas por empresa e podem ser conferidas.",
       "Finance Agent trabalha com dados reais e contexto do negócio.",
     ],
     emptyStateTitle: "Sua central financeira está pronta para começar",
@@ -685,7 +774,7 @@ export const moduleDefinitions: Record<ModuleDefinition["slug"], ModuleDefinitio
     integrations: ["NF-e", "NFC-e", "NFS-e", "Cupom fiscal", "Produtos", "Financeiro"],
     guardrails: [
       "A IA apoia, mas não substitui contador.",
-      "Perfis fiscais ficam por workspace e com auditoria.",
+      "Perfis fiscais ficam separados por empresa e com histórico de revisão.",
       "Sem inferir tributos inexistentes.",
     ],
     emptyStateTitle: "Nenhum perfil fiscal configurado",
@@ -729,7 +818,7 @@ export const moduleDefinitions: Record<ModuleDefinition["slug"], ModuleDefinitio
     integrations: ["Importadores", "Distribuidores", "Atacadistas", "Indústrias", "Planilhas", "Estoque"],
     guardrails: [
       "Insights de compra dependem de saldo, giro e catálogo reais.",
-      "Cada fornecedor pertence ao workspace.",
+      "Cada fornecedor fica associado à empresa correta.",
       "Sem sugerir economia fictícia enquanto não houver dados reais.",
     ],
     emptyStateTitle: "Sua rede de fornecedores ainda está vazia",
@@ -950,7 +1039,7 @@ export const moduleDefinitions: Record<ModuleDefinition["slug"], ModuleDefinitio
     guardrails: [
       "Sinais externos nao substituem dado financeiro real.",
       "Recomendacoes devem explicitar fonte, confianca e impacto esperado.",
-      "Watchlists ficam por workspace.",
+      "Listas de concorrentes ficam separadas por empresa.",
     ],
     emptyStateTitle: "Nenhum sinal de mercado consolidado",
     emptyStateDescription:

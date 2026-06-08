@@ -13,7 +13,7 @@ const initialState: AdminActionState = {};
 function SubmitButton() {
   const { pending } = useFormStatus();
 
-  return <Button type="submit">{pending ? "Emitindo chave..." : "Gerar API key"}</Button>;
+  return <Button type="submit">{pending ? "Emitindo chave..." : "Gerar chave de acesso"}</Button>;
 }
 
 export function ApiKeyForm() {

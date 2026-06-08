@@ -64,7 +64,7 @@ export default async function MarketIntelligencePage() {
         <Card>
           <CardHeader>
             <CardTitle>Recomendacoes acionaveis</CardTitle>
-            <CardDescription>Leve os sinais mais fortes para Growth Agent, Pricing Agent e Data Cloud executivo.</CardDescription>
+            <CardDescription>Leve os sinais mais fortes para decisões de crescimento, preço e compra.</CardDescription>
           </CardHeader>
           <CardContent className="space-y-3">
             {snapshot.recommendations.length > 0 ? (

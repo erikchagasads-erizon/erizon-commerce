@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { ModuleIcon } from "@/components/ui/module-icon";
-import { navigationGroups } from "@/lib/modules";
+import { businessNavigationGroups } from "@/lib/modules";
 import { cn } from "@/lib/utils";
 
 export function Sidebar({
@@ -30,14 +30,14 @@ export function Sidebar({
 
       {/* Workspace info */}
       <div className="border-b border-white/6 px-4 py-3">
-        <p className="text-xs text-stone-500">Workspace</p>
+        <p className="text-xs text-stone-500">Empresa</p>
         <p className="mt-0.5 truncate text-sm font-medium text-white">{workspaceName}</p>
         <p className="mt-0.5 truncate text-xs text-stone-600">{userLabel}</p>
       </div>
 
       {/* Nav */}
       <nav className="flex-1 overflow-y-auto px-3 py-4 space-y-5">
-        {navigationGroups.map((group) => (
+        {businessNavigationGroups.map((group) => (
           <div key={group.title}>
             <p className="mb-1.5 px-2 text-[10px] font-medium uppercase tracking-[0.2em] text-stone-600">
               {group.title}

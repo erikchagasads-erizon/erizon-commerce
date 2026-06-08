@@ -22,12 +22,11 @@ export default async function BillingPage() {
 
   return (
     <div className="space-y-6">
-      <section className="border border-white/7 bg-[#100e0a] rounded-2xl p-6 sm:p-8">
-        <Badge>Billing & Entitlements</Badge>
-        <h1 className="mt-5 text-3xl font-semibold sm:text-4xl">Assinatura, trial, limites e histórico financeiro do SaaS.</h1>
+      <section className="rounded-2xl border border-white/7 bg-[#100e0a] p-6 sm:p-8">
+        <Badge>Assinatura</Badge>
+        <h1 className="mt-5 text-3xl font-semibold sm:text-4xl">Plano, uso e pagamentos da empresa.</h1>
         <p className="mt-4 max-w-3xl text-base leading-7 text-[var(--text-soft)]">
-          Esta camada prepara o workspace para comercialização com trial, upgrades, limites operacionais e histórico de
-          pagamento sem expor dados sensíveis no frontend.
+          Acompanhe o plano atual, o volume de uso e o histórico financeiro de forma simples.
         </p>
       </section>
 
@@ -35,7 +34,7 @@ export default async function BillingPage() {
         <Card>
           <CardHeader>
             <CardTitle>Plano atual</CardTitle>
-            <CardDescription>Status da assinatura e entitlements efetivos do workspace.</CardDescription>
+            <CardDescription>Status da assinatura e benefícios ativos.</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="rounded-xl border border-white/7 bg-white/3 p-5">
@@ -53,8 +52,8 @@ export default async function BillingPage() {
                 <Link className={buttonStyles({})} href="/upgrade">
                   Ver upgrades
                 </Link>
-                <Link className={buttonStyles({ variant: "secondary" })} href="/system-health">
-                  Saúde do sistema
+                <Link className={buttonStyles({ variant: "secondary" })} href="/integrations">
+                  Ver integrações
                 </Link>
               </div>
             </div>
@@ -63,15 +62,15 @@ export default async function BillingPage() {
 
         <Card>
           <CardHeader>
-            <CardTitle>Uso do workspace</CardTitle>
-            <CardDescription>Leitura real do uso para orientar upgrade antes de travar a operação.</CardDescription>
+            <CardTitle>Uso da empresa</CardTitle>
+            <CardDescription>Leitura real para orientar upgrade antes de limitar a operação.</CardDescription>
           </CardHeader>
           <CardContent className="grid gap-3 md:grid-cols-2">
             {[
               { label: "Produtos", value: String(usage.products), limit: plan.limits.maxProducts },
               { label: "Pedidos no mês", value: String(usage.ordersThisMonth), limit: plan.limits.maxOrdersPerMonth },
               { label: "Marketplaces conectados", value: String(usage.connectedMarketplaces), limit: plan.limits.marketPlaces },
-              { label: "Mensagens de IA", value: String(usage.aiMessagesThisMonth), limit: plan.limits.aiMessagesPerMonth },
+              { label: "Perguntas para IA", value: String(usage.aiMessagesThisMonth), limit: plan.limits.aiMessagesPerMonth },
             ].map((metric) => (
               <div key={metric.label} className="rounded-xl border border-white/7 bg-white/3 p-4">
                 <p className="text-xs uppercase tracking-[0.18em] text-stone-500">{metric.label}</p>
@@ -88,7 +87,7 @@ export default async function BillingPage() {
       <Card>
         <CardHeader>
           <CardTitle>Histórico de pagamentos</CardTitle>
-          <CardDescription>Quando houver cobrança real conectada, os eventos aparecem aqui.</CardDescription>
+          <CardDescription>Quando houver cobranças, elas aparecem aqui.</CardDescription>
         </CardHeader>
         <CardContent className="space-y-3">
           {payments.length > 0 ? (
@@ -104,8 +103,7 @@ export default async function BillingPage() {
             ))
           ) : (
             <div className="rounded-xl border border-dashed border-white/8 bg-white/3 p-6 text-sm leading-6 text-[var(--text-soft)]">
-              Nenhum pagamento registrado ainda. A estrutura está pronta para histórico real assim que o provider de billing
-              for conectado.
+              Nenhum pagamento registrado ainda.
             </div>
           )}
         </CardContent>
@@ -113,4 +111,3 @@ export default async function BillingPage() {
     </div>
   );
 }
-

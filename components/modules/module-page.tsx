@@ -103,11 +103,11 @@ export function ModulePage({ module }: { module: ModuleDefinition }) {
                   {module.emptyStateDescription}
                 </p>
                 <div className="mt-5 flex flex-wrap gap-3">
-                  <Link className={buttonStyles({})} href="/settings">
-                    Revisar setup
+                  <Link className={buttonStyles({})} href="/integrations">
+                    Conectar canais
                   </Link>
                   <Link className={buttonStyles({ variant: "secondary" })} href="/executive-center">
-                    Ver central executiva
+                    Ver Erizon AI
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </div>
@@ -135,8 +135,8 @@ export function ModulePage({ module }: { module: ModuleDefinition }) {
 
           <Card>
             <CardHeader>
-              <CardTitle>Guardrails do módulo</CardTitle>
-              <CardDescription>Decisões importantes de produto e arquitetura já embutidas.</CardDescription>
+              <CardTitle>Cuidados importantes</CardTitle>
+              <CardDescription>Princípios para operar com dados reais e decisões confiáveis.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-3">
               {module.guardrails.map((item) => (

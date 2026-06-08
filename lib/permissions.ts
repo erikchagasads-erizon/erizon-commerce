@@ -24,12 +24,12 @@ export const roleLabels: Record<WorkspaceRole, string> = {
 };
 
 export const roleDescriptions: Record<WorkspaceRole, string> = {
-  admin: "Gerencia a operação e o workspace.",
+  admin: "Gerencia a operação e a empresa.",
   analyst: "Analisa dados, IA e operação com contexto ampliado.",
   finance: "Acessa billing, pagamentos e financeiro.",
   manager: "Gerencia módulos e times operacionais.",
   operator: "Opera pedidos, estoque, logística e PDV.",
-  owner: "Controle total do workspace e da assinatura.",
+  owner: "Controle total da empresa e da assinatura.",
   support: "Acesso limitado para suporte e atendimento.",
   viewer: "Somente leitura.",
 };
@@ -53,4 +53,3 @@ export function getRoleCapabilities(role: WorkspaceRole | null | undefined) {
     canViewFinance: ["owner", "admin", "manager", "finance", "analyst"].includes(current),
   };
 }
-

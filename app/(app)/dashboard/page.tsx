@@ -8,31 +8,30 @@ export default async function DashboardPage() {
 
   return (
     <DashboardView
-      context={context}
       metrics={[
         {
           icon: "products",
-          label: "SKUs ativos",
+          label: "Produtos",
           value: String(snapshot.counts.products),
-          hint: "Catálogo mestre pronto para abastecer canais, estoque e pricing.",
+          hint: "Itens prontos para vender, controlar estoque e analisar margem.",
         },
         {
           icon: "orders",
-          label: "Pedidos registrados",
+          label: "Pedidos",
           value: String(snapshot.counts.orders),
-          hint: "Fila omnichannel concentrada no mesmo workspace.",
+          hint: "Vendas importadas dos canais conectados.",
         },
         {
           icon: "finance",
-          label: "Lançamentos financeiros",
+          label: "Movimento financeiro",
           value: String(snapshot.counts.finance),
-          hint: "Base inicial para fluxo de caixa, margem e EBITDA.",
+          hint: "Base para acompanhar caixa, lucro e recebimentos.",
         },
         {
           icon: "suppliers",
-          label: "Fornecedores mapeados",
+          label: "Fornecedores",
           value: String(snapshot.counts.suppliers),
-          hint: "Estrutura pronta para cotações, comparação e compra assistida.",
+          hint: "Parceiros de compra para repor estoque com mais segurança.",
         },
       ]}
       recentInsights={snapshot.recentInsights}
