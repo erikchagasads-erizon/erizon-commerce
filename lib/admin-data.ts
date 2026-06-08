@@ -56,6 +56,9 @@ export interface ApiKeyRecord {
 export interface IntegrationHealthRecord {
   connectedAt: string | null;
   id: string;
+  lastError: string | null;
+  lastSyncAt: string | null;
+  metadata: Record<string, unknown>;
   name: string;
   provider: string;
   status: string;
@@ -337,12 +340,12 @@ export async function getIntegrationHealth(workspaceId: string | null) {
     const [{ data: marketData }, { data: ecommerceData }] = await Promise.all([
       supabase
         .from("marketplace_accounts")
-        .select("id, provider, account_name, status, connected_at")
+        .select("id, provider, account_name, status, connected_at, last_sync_at, last_error, metadata")
         .eq("workspace_id", workspaceId)
         .order("created_at", { ascending: false }),
       supabase
         .from("ecommerce_integrations")
-        .select("id, provider, store_name, status, connected_at")
+        .select("id, provider, store_name, status, connected_at, last_sync_at, last_error, metadata")
         .eq("workspace_id", workspaceId)
         .order("created_at", { ascending: false }),
     ]);
@@ -353,6 +356,9 @@ export async function getIntegrationHealth(workspaceId: string | null) {
             account_name: string;
             connected_at: string | null;
             id: string;
+            last_error: string | null;
+            last_sync_at: string | null;
+            metadata: Record<string, unknown> | null;
             provider: string;
             status: string;
           }>
@@ -360,6 +366,9 @@ export async function getIntegrationHealth(workspaceId: string | null) {
         | undefined)?.map((item) => ({
         connectedAt: item.connected_at,
         id: item.id,
+        lastError: item.last_error,
+        lastSyncAt: item.last_sync_at,
+        metadata: item.metadata ?? {},
         name: item.account_name,
         provider: item.provider,
         status: item.status,
@@ -371,6 +380,9 @@ export async function getIntegrationHealth(workspaceId: string | null) {
         | Array<{
             connected_at: string | null;
             id: string;
+            last_error: string | null;
+            last_sync_at: string | null;
+            metadata: Record<string, unknown> | null;
             provider: string;
             status: string;
             store_name: string;
@@ -379,6 +391,9 @@ export async function getIntegrationHealth(workspaceId: string | null) {
         | undefined)?.map((item) => ({
         connectedAt: item.connected_at,
         id: item.id,
+        lastError: item.last_error,
+        lastSyncAt: item.last_sync_at,
+        metadata: item.metadata ?? {},
         name: item.store_name,
         provider: item.provider,
         status: item.status,

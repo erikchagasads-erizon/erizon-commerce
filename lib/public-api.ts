@@ -98,9 +98,17 @@ export async function queryPublicResource({
 }) {
   const config = resourceConfig[resource];
   const supabase = createServiceSupabaseClient();
+  type DynamicQuery = {
+    select: (columns: string) => {
+      eq: (column: string, value: string) => {
+        order: (column: string, options: { ascending: boolean }) => {
+          limit: (value: number) => PromiseLike<{ data: unknown[] | null }>;
+        };
+      };
+    };
+  };
 
-  const { data } = await supabase
-    .from(config.table)
+  const { data } = await (supabase.from(config.table) as unknown as DynamicQuery)
     .select(config.defaultSelect)
     .eq("workspace_id", workspaceId)
     .order("created_at", { ascending: false })

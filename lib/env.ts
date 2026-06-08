@@ -7,6 +7,12 @@ export const env = {
   GROQ_API_KEY: process.env.GROQ_API_KEY ?? "",
   GROQ_MODEL: process.env.GROQ_MODEL ?? "",
   APP_ENCRYPTION_KEY: process.env.APP_ENCRYPTION_KEY ?? "",
+  MERCADO_LIVRE_CLIENT_ID: process.env.MERCADO_LIVRE_CLIENT_ID ?? "",
+  MERCADO_LIVRE_CLIENT_SECRET: process.env.MERCADO_LIVRE_CLIENT_SECRET ?? "",
+  MERCADO_LIVRE_REDIRECT_URI: process.env.MERCADO_LIVRE_REDIRECT_URI ?? "",
+  SHOPEE_PARTNER_ID: process.env.SHOPEE_PARTNER_ID ?? "",
+  SHOPEE_PARTNER_KEY: process.env.SHOPEE_PARTNER_KEY ?? "",
+  SHOPEE_REDIRECT_URI: process.env.SHOPEE_REDIRECT_URI ?? "",
 };
 
 export const hasSupabaseEnv =
@@ -20,6 +26,12 @@ export const missingSupabaseEnv = [
 export const hasGroqEnv = env.GROQ_API_KEY.length > 0 && env.GROQ_MODEL.length > 0;
 export const hasServiceRoleEnv = env.SUPABASE_SERVICE_ROLE_KEY.length > 0;
 export const hasEncryptionKey = env.APP_ENCRYPTION_KEY.length >= 32;
+export const hasMercadoLivreEnv =
+  env.MERCADO_LIVRE_CLIENT_ID.length > 0 &&
+  env.MERCADO_LIVRE_CLIENT_SECRET.length > 0 &&
+  env.MERCADO_LIVRE_REDIRECT_URI.length > 0;
+export const hasShopeeEnv =
+  env.SHOPEE_PARTNER_ID.length > 0 && env.SHOPEE_PARTNER_KEY.length > 0 && env.SHOPEE_REDIRECT_URI.length > 0;
 
 export const missingGroqEnv = [
   !env.GROQ_API_KEY && "GROQ_API_KEY",
@@ -29,4 +41,16 @@ export const missingGroqEnv = [
 export const missingProductionEnv = [
   !env.SUPABASE_SERVICE_ROLE_KEY && "SUPABASE_SERVICE_ROLE_KEY",
   !hasEncryptionKey && "APP_ENCRYPTION_KEY",
+].filter(Boolean) as string[];
+
+export const missingMercadoLivreEnv = [
+  !env.MERCADO_LIVRE_CLIENT_ID && "MERCADO_LIVRE_CLIENT_ID",
+  !env.MERCADO_LIVRE_CLIENT_SECRET && "MERCADO_LIVRE_CLIENT_SECRET",
+  !env.MERCADO_LIVRE_REDIRECT_URI && "MERCADO_LIVRE_REDIRECT_URI",
+].filter(Boolean) as string[];
+
+export const missingShopeeEnv = [
+  !env.SHOPEE_PARTNER_ID && "SHOPEE_PARTNER_ID",
+  !env.SHOPEE_PARTNER_KEY && "SHOPEE_PARTNER_KEY",
+  !env.SHOPEE_REDIRECT_URI && "SHOPEE_REDIRECT_URI",
 ].filter(Boolean) as string[];

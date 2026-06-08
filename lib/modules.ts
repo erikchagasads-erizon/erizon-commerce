@@ -33,6 +33,7 @@ export type ModuleSlug =
   | "data-cloud"
   | "event-bus"
   | "market-intelligence"
+  | "catalog-intelligence"
   | "automations"
   | "mobile"
   | "orders"
@@ -65,6 +66,7 @@ export type ProductModuleSlug =
   | "data-cloud"
   | "event-bus"
   | "market-intelligence"
+  | "catalog-intelligence"
   | "automations"
   | "mobile";
 
@@ -101,6 +103,13 @@ export const navigationGroups = [
         label: "Onboarding",
         description: "Checklist inicial guiado",
         icon: "shield" as const,
+      },
+      {
+        slug: "catalog-intelligence" as const,
+        href: "/catalog-intelligence",
+        label: "Catalogos",
+        description: "Preco, margem e concorrencia",
+        icon: "store" as const,
       },
       {
         slug: "executive-center" as const,
@@ -1044,6 +1053,51 @@ export const moduleDefinitions: Record<ModuleDefinition["slug"], ModuleDefinitio
     emptyStateTitle: "Nenhum sinal de mercado consolidado",
     emptyStateDescription:
       "Cadastre fontes e concorrentes relevantes para transformar inteligencia externa em decisao conectada ao seu estoque, margem e canais.",
+  },
+  "catalog-intelligence": {
+    slug: "catalog-intelligence",
+    label: "Catalog Intelligence",
+    title: "Especialista de catalogos e disputa competitiva",
+    subtitle: "Analise vendedores, preco, margem, frete, reputacao e recomendacao por produto.",
+    description:
+      "O modulo cruza dados do Mercado Livre com custos reais do produto para decidir se vale baixar, manter, subir ou sair da disputa.",
+    icon: "store",
+    stage: "Pronto para analisar catalogos conectados",
+    quickActions: ["Analisar produto", "Revisar margem", "Monitorar concorrentes"],
+    filters: ["Produto", "Catalogo", "Risco", "Recomendacao", "Concorrente"],
+    columns: ["Produto", "Meu preco", "Menor preco", "Margem", "Lider", "Recomendacao", "Criado em"],
+    kpis: [
+      {
+        label: "Memoria competitiva",
+        value: "Historico persistente",
+        hint: "Cada analise salva vendedores, precos, estimativas e recomendacoes.",
+      },
+      {
+        label: "Margem real",
+        value: "Custo + taxas",
+        hint: "A decisao considera compra, frete, comissao, imposto e custo operacional.",
+      },
+      {
+        label: "Agente independente",
+        value: "Perguntas naturais",
+        hint: "O agente responde se vale baixar preco, entrar no catalogo ou preservar margem.",
+      },
+    ],
+    aiPrompts: [
+      "Vale a pena baixar preco?",
+      "Posso ser o menor preco?",
+      "Quem lidera esse catalogo?",
+      "Minha margem esta saudavel?",
+    ],
+    integrations: ["Mercado Livre", "Produtos", "Custos", "Historico de precos", "Erizon AI"],
+    guardrails: [
+      "Nao inventa venda quando o marketplace nao retorna estimativa.",
+      "Tokens nunca aparecem no frontend.",
+      "Recomendacoes dependem de custo real informado.",
+    ],
+    emptyStateTitle: "Nenhuma analise de catalogo ainda",
+    emptyStateDescription:
+      "Selecione um produto importado e informe o custo real para gerar a primeira leitura competitiva.",
   },
   automations: {
     slug: "automations",

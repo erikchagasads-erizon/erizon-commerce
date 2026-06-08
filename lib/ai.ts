@@ -4,6 +4,7 @@ export type AgentSlug =
   | "stock"
   | "pricing"
   | "catalog"
+  | "catalog-intelligence"
   | "supply"
   | "tax"
   | "growth"
@@ -175,6 +176,25 @@ export const agentDefinitions: AgentDefinition[] = [
     quickActions: ["Reescrever título", "Ajustar catálogo", "Atualizar anúncios"],
     tools: ["Anúncios", "Catálogo", "Marketplaces", "Pricing"],
     systemFocus: "Performance comercial de catálogo e anúncios.",
+  },
+  {
+    slug: "catalog-intelligence",
+    name: "Catalog Intelligence Agent",
+    badge: "Catalogos",
+    mission: "Analisar catalogos competitivos, vendedores, margem e preco ideal com independencia operacional.",
+    summary:
+      "Especialista em disputa de catalogo: compara vendedores, preco, reputacao, frete, Full/Flex, vendas aproximadas e custo real antes de recomendar acao.",
+    specialty: ["Menor preco", "Margem real", "Vendas por vendedor", "Full/Flex", "Recomendacao executiva"],
+    quickQuestions: [
+      "Vale a pena baixar preco?",
+      "Posso ser o menor preco?",
+      "Quem lidera esse catalogo?",
+      "Minha margem esta saudavel?",
+      "Vale a pena entrar nesse catalogo?",
+    ],
+    quickActions: ["Analisar catalogo", "Salvar recomendacao", "Monitorar concorrentes"],
+    tools: ["Mercado Livre catalogo", "Custos do produto", "Historico de precos", "Recomendacoes de preco"],
+    systemFocus: "Decidir se deve baixar, manter, subir ou sair da disputa com base em margem e concorrencia real.",
   },
   {
     slug: "supply",

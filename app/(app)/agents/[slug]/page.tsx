@@ -7,6 +7,7 @@ export function generateStaticParams() {
     { slug: "stock" },
     { slug: "pricing" },
     { slug: "catalog" },
+    { slug: "catalog-intelligence" },
     { slug: "supply" },
     { slug: "tax" },
     { slug: "growth" },
